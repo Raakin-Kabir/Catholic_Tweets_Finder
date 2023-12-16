@@ -1,7 +1,9 @@
 from transformers import pipeline
 
-pipe = pipeline(model="facebook/bart-large-mnli")
-print(pipe("Even if by a special privilege their predestination were revealed to some, it is not fitting that it should be revealed to everyone; because, if so, those who were not predestined would despair; and security would beget negligence in the predestined.",
-     candidate_labels=["insane", "sane"]))
+classifier = pipeline("zero-shot-classification",
+                      model="facebook/bart-large-mnli")
+sequence_to_classify = "The only innocent feature in babies is the weakness of their frames; the minds of infants are far from innocent."
+candidate_labels = ['absurd', 'rational']
+print(classifier(sequence_to_classify, candidate_labels))
 
 
